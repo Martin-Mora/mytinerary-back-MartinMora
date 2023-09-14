@@ -70,7 +70,17 @@ const tineraryControllers = {
     let tinerary;
     let success = true;
     try {
-      tinerary = await tinerary.findOneAndDelete({ _id: id });
+      tinerary = await Tinerary.findOneAndDelete({ _id: id });
+      console.log(tinerary)
+
+      const city = await City.findOne({ tineraries: id });
+      if (city) {
+        // Filtra el array "tineraries" para eliminar el ID del itinerario
+        city.tineraries = city.tineraries.filter((itineraryId) => itineraryId.toString() !== id);
+        await city.save();
+      }
+
+
       res.json({
         response: tinerary,
         success,
