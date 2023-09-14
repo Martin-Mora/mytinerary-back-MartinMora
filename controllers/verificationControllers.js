@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 const verificationControllers = {
-  singUp: async (req, res, next) => {
+  signUp: async (req, res, next) => {
     try {
       const ExistEmail = await User.findOne({ email: req.body.email });
 
@@ -43,7 +43,7 @@ const verificationControllers = {
     }
   },
 
-  singIn: async (req, res, next) => {
+  signIn: async (req, res, next) => {
     try {
       let { email: emailBody, password } = req.body;
 
